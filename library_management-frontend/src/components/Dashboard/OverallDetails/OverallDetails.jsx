@@ -1,8 +1,19 @@
 import BriefDetailCard from "./BriefDetailCard";
 
-const totalVisitors = 1223;
-const borrowedBooks = 730;
-const overdueBooks = 201;
+const details = [
+  {
+    name: "Total Visitors",
+    number: 1223,
+  },
+  {
+    name: "Borrowed Books",
+    number: 730,
+  },
+  {
+    name: "Overdue Books",
+    number: 201,
+  },
+];
 
 const OverallDetails = () => {
   return (
@@ -19,9 +30,13 @@ const OverallDetails = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:flex justify-around">
-        <BriefDetailCard name="Total Visitors" number={totalVisitors} />
-        <BriefDetailCard name="Borrowed Books" number={borrowedBooks} />
-        <BriefDetailCard name="Overdue Books" number={overdueBooks} />
+        {details.map((card) => (
+          <BriefDetailCard
+            name={card.name}
+            number={card.number}
+            key={card.name}
+          />
+        ))}
       </div>
     </div>
   );
