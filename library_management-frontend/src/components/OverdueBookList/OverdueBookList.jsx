@@ -1,4 +1,21 @@
+import { useEffect, useState } from "react";
+import axios from "../../api/axios";
+
 const OverdueBookList = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("/issue-books/get-overdue");
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className="bg-slate-100 rounded-md shadow-md shadow-slate-400">
       <div className="flex justify-start">
@@ -22,21 +39,20 @@ const OverdueBookList = () => {
                 Title
               </th>
               <th scope="col" className="px-6 py-3">
-                Author
-              </th>
-              <th scope="col" className="px-6 py-3">
                 Overdue
               </th>
             </tr>
           </thead>
 
           <tbody>
-            <tr className="border-b">
-              <td className="px-6 py-4">001</td>
-              <td className="px-6 py-4">Lord of the rings</td>
-              <td className="px-6 py-4">Kamal</td>
-              <td className="px-6 py-4">08</td>
-            </tr>
+            {data.map((book) => (
+              <tr className="border-b" key={book.userId}>
+                <td className="px-6 py-4">{book.userName}</td>
+                <td className="px-6 py-4">{book.bookId}</td>
+                <td className="px-6 py-4">{book.bookTitle}</td>
+                <td className="px-6 py-4">{book.fine}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

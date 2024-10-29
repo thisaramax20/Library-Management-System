@@ -1,9 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserFormModel from "./UserFormModel";
+import axios from "../../../api/axios";
 
 const UserList = () => {
   const [model, setModel] = useState(false);
   const triggerModel = () => setModel(!model);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("/user/get-first-5");
+        if (response?.data !== null) {
+          setData(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const getAllUsers = async () => {
+    try {
+      const response = await axios.get("/user/get-all");
+      if (response?.data !== null) {
+        setData(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -42,16 +70,21 @@ const UserList = () => {
             </thead>
 
             <tbody>
-              <tr className="border-b">
-                <td className="px-6 py-4">001</td>
-                <td className="px-6 py-4">Kamal</td>
-                <td className="px-6 py-4">08</td>
-              </tr>
+              {data.map((user) => (
+                <tr key={user.id}>
+                  <td className="px-6 py-4">{user.id}</td>
+                  <td className="px-6 py-4">{user.name}</td>
+                  <td className="px-6 py-4">{user.countOfBooksIssued}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
         <div className="flex justify-end m-5">
-          <button className="border-none text-red-500 hover:font-bold">
+          <button
+            className="border-none text-red-500 hover:font-bold"
+            onClick={getAllUsers}
+          >
             See All
           </button>
         </div>

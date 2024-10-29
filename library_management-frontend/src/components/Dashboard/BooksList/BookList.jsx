@@ -1,10 +1,38 @@
-import Button from "../../Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BookFormModel from "./BookFormModel";
+import axios from "../../../api/axios";
 
 const BookList = () => {
   const [model, setModel] = useState(false);
   const triggerModel = () => setModel(!model);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("/book/get-first-5");
+
+        if (response?.data !== null) {
+          setData(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const getAllBooks = async () => {
+    try {
+      const response = await axios.get("/book/get-all");
+      if (response?.data !== null) {
+        setData(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -46,17 +74,22 @@ const BookList = () => {
             </thead>
 
             <tbody>
-              <tr className="border-b">
-                <td className="px-6 py-4">001</td>
-                <td className="px-6 py-4">Lord of the rings</td>
-                <td className="px-6 py-4">Kamal</td>
-                <td className="px-6 py-4">08</td>
-              </tr>
+              {data.map((book) => (
+                <tr key={book.id}>
+                  <td className="px-6 py-4">{book.id}</td>
+                  <td className="px-6 py-4">{book.title}</td>
+                  <td className="px-6 py-4">{book.authorName}</td>
+                  <td className="px-6 py-4">{book.state}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
         <div className="flex justify-end m-5">
-          <button className="border-none text-red-500 hover:font-bold">
+          <button
+            className="border-none text-red-500 hover:font-bold"
+            onClick={getAllBooks}
+          >
             See All
           </button>
         </div>

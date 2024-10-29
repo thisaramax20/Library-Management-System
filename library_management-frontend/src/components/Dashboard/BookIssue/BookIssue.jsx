@@ -1,6 +1,22 @@
 import Button from "../../Button";
+import axios from "../../../api/axios";
+import { useEffect, useState } from "react";
 
 const BookIssue = () => {
+  const [issueBooks, setIssueBooks] = useState([]);
+
+  useEffect(() => {
+    async function fetchIssueBooks() {
+      try {
+        const response = await axios.get("/issue-books/get-ongoing");
+        if (response?.data) setIssueBooks(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchIssueBooks();
+  }, []);
+
   return (
     <div className="bg-slate-100 rounded-md shadow-md shadow-slate-400">
       <div className="flex justify-evenly">
@@ -30,12 +46,14 @@ const BookIssue = () => {
           </thead>
 
           <tbody>
-            <tr className="border-b">
-              <td className="px-6 py-4">001</td>
-              <td className="px-6 py-4">Lord of the rings</td>
-              <td className="px-6 py-4">Kamal</td>
-              <td className="px-6 py-4">08</td>
-            </tr>
+            {issueBooks.map((book) => (
+              <tr key={book.bookId}>
+                <td className="px-6 py-4">{book.userId}</td>
+                <td className="px-6 py-4">{book.bookId}</td>
+                <td className="px-6 py-4">{book.issuedOn}</td>
+                <td className="px-6 py-4">{book.expectedOn}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

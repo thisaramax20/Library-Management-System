@@ -1,3 +1,4 @@
+import AuthorList from "../AuthorList/AuthorList";
 import OverdueBookList from "../OverdueBookList/OverdueBookList";
 import BookIssue from "./BookIssue/BookIssue";
 import BookList from "./BooksList/BookList";
@@ -19,6 +20,7 @@ const Dashboard = () => {
       <OverdueBookList />
       <div className="m-5 grid grid-cols-1 md:grid-cols-2 gap-5">
         <BookIssue />
+        <AuthorList />
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
 import BriefDetailCard from "./BriefDetailCard";
+import axios from "../../../api/axios";
+import { useEffect, useState } from "react";
 
 const details = [
   {
@@ -16,6 +18,34 @@ const details = [
 ];
 
 const OverallDetails = () => {
+  const [data, setData] = useState(details);
+  // Fetching data from the API
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("/issue-books/get-counts");
+        if (response?.data !== null) {
+          setData([
+            {
+              name: "Total Visitors",
+              number: response.data?.totalVisitors || 0,
+            },
+            {
+              name: "Borrowed Books",
+              number: response.data.borrowed || 0,
+            },
+            {
+              name: "Overdue Books",
+              number: response.data.overdue || 0,
+            },
+          ]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <div>
       <div>
@@ -30,7 +60,7 @@ const OverallDetails = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:flex justify-around">
-        {details.map((card) => (
+        {data.map((card) => (
           <BriefDetailCard
             name={card.name}
             number={card.number}
