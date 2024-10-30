@@ -2,33 +2,6 @@ import TopChoiceCard from "./TopChoiceCard";
 import axios from "../../../api/axios";
 import { useEffect, useState } from "react";
 
-const details = [
-  {
-    name: "Hobbit",
-    author: "JR Tolkin",
-  },
-  {
-    name: "Hobbit",
-    author: "JR Tolkin",
-  },
-  {
-    name: "Hobbit",
-    author: "JR Tolkin",
-  },
-  {
-    name: "Hobbit",
-    author: "JR Tolkin",
-  },
-  {
-    name: "Hobbit",
-    author: "JR Tolkin",
-  },
-  {
-    name: "Hobbit",
-    author: "JR Tolkin",
-  },
-];
-
 const TopChoice = () => {
   const [topChoices, setTopChoices] = useState([]);
   useEffect(() => {
@@ -53,6 +26,7 @@ const TopChoice = () => {
               name={card.title}
               author={card.authorName}
               key={card.id}
+              src={card.src}
             />
           ))}
         </div>
