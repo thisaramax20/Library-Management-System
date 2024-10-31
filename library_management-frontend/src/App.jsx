@@ -6,8 +6,15 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import DashboardUser from "./components/DashboardUser/DashboardUser";
 import NormalIssue from "./components/Dashboard/BookIssue/NormalIssue/NormalIssue";
 import PreOrder from "./components/Dashboard/BookIssue/PreOrder/PreOrder";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const App = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+    AOS.refresh();
+  }, []);
   return (
     <div>
       <Navbar />

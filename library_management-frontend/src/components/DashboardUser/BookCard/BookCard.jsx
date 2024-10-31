@@ -12,8 +12,8 @@ const BookCard = ({ name, author, img, genre, bookCode, userId }) => {
     }
   }
   return (
-    <div>
-      <div className="rounded-md w-60 h-96 bg-slate-100 shadow-lg shadow-slate-400 p-8">
+    <div data-aos="fade-left">
+      <div className="rounded-md w-60 h-auto bg-slate-100 shadow-lg shadow-slate-400 p-8">
         <img src={img} alt={name} className="rounded-md h-48 w-32" />
         <p className="text-2xl tracking-tight font-bold mt-2">{name}</p>
         <p className="text-lg mt-2">{author}</p>

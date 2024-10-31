@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "../../../api/axios";
-
+const categoryList = [
+  {
+    id: 1,
+    name: "Fiction",
+  },
+  {
+    id: 2,
+    name: "Education",
+  },
+  {
+    id: 3,
+    name: "Social",
+  },
+];
 const BookFormModel = ({ closeModel }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -99,13 +112,19 @@ const BookFormModel = ({ closeModel }) => {
           >
             Category
           </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
-            type="text"
-            id="category"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-          />
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            {categoryList.map((data) => (
+              <option key={data.id} value={data.name}>
+                {data.name}
+              </option>
+            ))}
+          </select>
 
           <label
             className="block text-gray-700 text-sm font-bold mb-2 mt-2"
