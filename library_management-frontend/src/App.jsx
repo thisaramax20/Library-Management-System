@@ -9,6 +9,7 @@ import PreOrder from "./components/Dashboard/BookIssue/PreOrder/PreOrder";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import Reports from "./components/Dashboard/Reports/Reports";
 
 const App = () => {
   useEffect(() => {
@@ -25,7 +26,9 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/normal-issue" element={<NormalIssue />} />
           <Route path="/pre-order" element={<PreOrder />} />
-          <Route path="/dashboard-user" element={<DashboardUser />}></Route>
+          <Route path="/dashboard-user" element={<DashboardUser />} />
+          <Route path="*" element={<h1>Page Not Found</h1>} />
+          <Route path="/reports" element={<Reports />} />
         </Routes>
       </BrowserRouter>
     </div>
