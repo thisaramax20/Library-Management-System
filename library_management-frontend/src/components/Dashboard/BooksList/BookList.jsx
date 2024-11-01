@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import BookFormModel from "./BookFormModel";
 import axios from "../../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const BookList = () => {
   const [model, setModel] = useState(false);
   const triggerModel = () => setModel(!model);
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
 
@@ -22,17 +24,6 @@ const BookList = () => {
     }
     fetchData();
   }, []);
-
-  const getAllBooks = async () => {
-    try {
-      const response = await axios.get("/book/get-all");
-      if (response?.data !== null) {
-        setData(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div>
@@ -88,7 +79,7 @@ const BookList = () => {
         <div className="flex justify-end m-5">
           <button
             className="border-none text-red-500 hover:font-bold"
-            onClick={getAllBooks}
+            onClick={() => navigate("/all-books")}
           >
             See All
           </button>

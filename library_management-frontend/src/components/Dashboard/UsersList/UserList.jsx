@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import UserFormModel from "./UserFormModel";
 import axios from "../../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
   const [model, setModel] = useState(false);
   const triggerModel = () => setModel(!model);
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
 
@@ -21,17 +23,6 @@ const UserList = () => {
     }
     fetchData();
   }, []);
-
-  const getAllUsers = async () => {
-    try {
-      const response = await axios.get("/user/get-all");
-      if (response?.data !== null) {
-        setData(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div>
@@ -83,7 +74,7 @@ const UserList = () => {
         <div className="flex justify-end m-5">
           <button
             className="border-none text-red-500 hover:font-bold"
-            onClick={getAllUsers}
+            onClick={() => navigate("/all-users")}
           >
             See All
           </button>

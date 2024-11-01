@@ -10,6 +10,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Reports from "./components/Dashboard/Reports/Reports";
+import AllBooks from "./components/Dashboard/BooksList/AllBooks";
+import AllUsers from "./components/Dashboard/UsersList/AllUsers";
+import AllAuthors from "./components/AuthorList/AllAuthors";
 
 const App = () => {
   useEffect(() => {
@@ -29,6 +32,9 @@ const App = () => {
           <Route path="/dashboard-user" element={<DashboardUser />} />
           <Route path="*" element={<h1>Page Not Found</h1>} />
           <Route path="/reports" element={<Reports />} />
+          <Route path="/all-books" element={<AllBooks />} />
+          <Route path="/all-users" element={<AllUsers />} />
+          <Route path="/all-authors" element={<AllAuthors />} />
         </Routes>
       </BrowserRouter>
     </div>

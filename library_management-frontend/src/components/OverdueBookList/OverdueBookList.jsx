@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../../api/axios";
+import { TiTick } from "react-icons/ti";
 
 const OverdueBookList = () => {
   const [data, setData] = useState([]);
@@ -8,13 +9,24 @@ const OverdueBookList = () => {
     async function fetchData() {
       try {
         const response = await axios.get("/issue-books/get-overdue");
-        console.log(response.data);
+        if (response?.data) setData(response.data);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
   }, []);
+  async function markAsReturned(userId, bookId, issuedOn) {
+    try {
+      await axios.post("/issue-books/mark-received", {
+        userId,
+        bookId,
+        issuedOn,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="bg-slate-100 rounded-md shadow-md shadow-slate-400">
@@ -51,6 +63,13 @@ const OverdueBookList = () => {
                 <td className="px-6 py-4">{book.bookId}</td>
                 <td className="px-6 py-4">{book.bookTitle}</td>
                 <td className="px-6 py-4">{book.fine}</td>
+                <td className="px-6 py-4">
+                  <TiTick
+                    onClick={() =>
+                      markAsReturned(data.userId, data.bookId, data.issuedOn)
+                    }
+                  />
+                </td>
               </tr>
             ))}
           </tbody>

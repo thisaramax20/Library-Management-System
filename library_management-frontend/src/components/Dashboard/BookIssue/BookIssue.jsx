@@ -2,6 +2,8 @@ import axios from "../../../api/axios";
 import { useEffect, useState } from "react";
 import BookIssueModel from "./BookIssueModel";
 import { Outlet } from "react-router-dom";
+import { TiDelete } from "react-icons/ti";
+import { TiTick } from "react-icons/ti";
 
 const BookIssue = () => {
   const [model, setModel] = useState(false);
@@ -19,6 +21,31 @@ const BookIssue = () => {
     }
     fetchIssueBooks();
   }, []);
+  async function markAsReturned(userId, bookId, issuedOn) {
+    try {
+      await axios.post("/issue-books/mark-received", {
+        userId,
+        bookId,
+        issuedOn,
+      });
+      alert("Book returned successfully!");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function deleteIssue(userId, bookId, issuedOn) {
+    try {
+      await axios.post("/issue-books/delete", {
+        userId,
+        bookId,
+        issuedOn,
+      });
+
+      alert("Book Issue deleted successfully!");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div>
@@ -67,6 +94,26 @@ const BookIssue = () => {
                   <td className="px-6 py-4">{book.bookId}</td>
                   <td className="px-6 py-4">{book.issuedOn}</td>
                   <td className="px-6 py-4">{book.expectedOn}</td>
+                  <td>
+                    <TiDelete
+                      size={30}
+                      className="hover:cursor-pointer"
+                      color="red"
+                      onClick={() =>
+                        deleteIssue(book.userId, book.bookId, book.issuedOn)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <TiTick
+                      size={30}
+                      className="hover:cursor-pointer"
+                      color="green"
+                      onClick={() =>
+                        markAsReturned(book.userId, book.bookId, book.issuedOn)
+                      }
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>

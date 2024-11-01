@@ -1,12 +1,13 @@
-import Button from "../Button";
 import axios from "../../api/axios";
 import { useEffect, useState } from "react";
 import AuthorModel from "./AuthorModel";
+import { useNavigate } from "react-router-dom";
 
 const AuthorList = () => {
   const [data, setData] = useState([]);
   const [model, setModel] = useState(false);
   const triggerModel = () => setModel(!model);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchAuthors() {
@@ -64,7 +65,10 @@ const AuthorList = () => {
           </table>
         </div>
         <div className="flex justify-end m-5">
-          <button className="border-none text-red-500 hover:font-bold">
+          <button
+            className="border-none text-red-500 hover:font-bold"
+            onClick={() => navigate("/all-authors")}
+          >
             See All
           </button>
         </div>
