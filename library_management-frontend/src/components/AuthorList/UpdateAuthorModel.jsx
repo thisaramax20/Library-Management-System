@@ -32,33 +32,56 @@ export const UpdateAuthorModel = ({ closeModel }) => {
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed bg-slate-300 shadow-lg shadow-slate-400 p-8 rounded-md w-96 h-auto">
+      <div className="bg-slate-200 shadow-lg rounded-lg p-6 w-96 mx-4">
+        <h2 className="text-lg font-semibold text-gray-800 text-center mb-4">
+          Search and Update
+        </h2>
+
         <input
           type="text"
-          placeholder="search"
-          className="rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-300 p-2"
+          placeholder="Search"
+          className="rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 p-2 w-full mb-4"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+
         <button
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-150"
           onClick={searchBook}
-        ></button>
-        <form>
-          <label htmlFor="name">Name</label>
+        >
+          Search
+        </button>
+
+        <form className="mt-6">
+          <label
+            htmlFor="name"
+            className="block text-gray-700 text-sm font-medium mb-2"
+          >
+            Name
+          </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="text"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Enter name"
           />
-          <button
-            onClick={handleSubmit}
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Update
-          </button>
+
+          <div className="flex justify-between mt-4">
+            <button
+              onClick={handleSubmit}
+              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-150 mr-2"
+            >
+              Update
+            </button>
+            <button
+              onClick={closeModel}
+              className="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 rounded transition duration-150 ml-2"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>

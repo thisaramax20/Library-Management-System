@@ -26,57 +26,74 @@ const AllAuthors = () => {
     fetchAuthors();
   }, []);
   return (
-    <div>
-      <div className="m-5">
-        <h1 className="text-4xl font-bold text-center">
+    <div className="flex flex-col items-center p-5 bg-gray-50 min-h-screen">
+      <div className="mb-5">
+        <h1 className="text-4xl font-bold text-center text-gray-800">
           Manage All The Books Here
         </h1>
       </div>
+
       {model && <AuthorModel closeModel={triggerModel} />}
       {modelUpdate && <UpdateAuthorModel closeModel={triggerModelUpdate} />}
       {modelDelete && <DeleteAuthorModel closeModel={triggerModelDelete} />}
-      <div className="grid grid-cols-1 m-5 md:flex justify-around">
-        <div className="bg-slate-200 p-5 rounded-md shadow-md h-96">
-          <ul>
-            <li className="m-8">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+        <div className="bg-slate-200 p-5 rounded-md shadow-lg h-full">
+          <ul className="space-y-4">
+            <li>
               <input
                 type="text"
-                placeholder="search"
-                className="rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-300 p-2"
+                placeholder="Search"
+                className="w-full rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-300 p-2"
               />
             </li>
-            <li className="m-8">
-              <MdAddBox size={30} onClick={triggerModel} /> Add New Author
+            <li className="flex items-center space-x-2">
+              <MdAddBox
+                size={30}
+                className="hover:cursor-pointer text-blue-600"
+                onClick={triggerModel}
+              />
+              <span>Add New Author</span>
             </li>
-            <li className="m-8">
-              <FaEdit size={30} onClick={triggerModelUpdate} /> Edit Author
-              Details
+            <li className="flex items-center space-x-2">
+              <FaEdit
+                size={30}
+                className="hover:cursor-pointer text-yellow-600"
+                onClick={triggerModelUpdate}
+              />
+              <span>Edit Author Details</span>
             </li>
-            <li className="m-8">
-              <RiDeleteBin4Fill size={30} onClick={triggerModelDelete} /> Delete
-              Authors
+            <li className="flex items-center space-x-2">
+              <RiDeleteBin4Fill
+                size={30}
+                className="hover:cursor-pointer text-red-600"
+                onClick={triggerModelDelete}
+              />
+              <span>Delete Authors</span>
             </li>
           </ul>
         </div>
 
-        <div className="bg-slate-200 p-5 rounded-md shadow-md">
-          <table className="table-auto text-left">
+        <div className="bg-slate-200 p-5 rounded-md shadow-lg">
+          <table className="table-auto w-full text-left">
             <thead>
-              <tr>
-                <th scope="col" className="px-6 py-3">
+              <tr className="bg-gray-300 text-gray-700">
+                <th scope="col" className="px-6 py-3 border-b">
                   Author ID
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 border-b">
                   Name
                 </th>
               </tr>
             </thead>
-
             <tbody>
               {data.map((author) => (
-                <tr key={author.id}>
-                  <td className="px-6 py-4">{author.id}</td>
-                  <td className="px-6 py-4">{author.name}</td>
+                <tr
+                  key={author.id}
+                  className="hover:bg-gray-100 transition-colors"
+                >
+                  <td className="px-6 py-4 border-b">{author.id}</td>
+                  <td className="px-6 py-4 border-b">{author.name}</td>
                 </tr>
               ))}
             </tbody>

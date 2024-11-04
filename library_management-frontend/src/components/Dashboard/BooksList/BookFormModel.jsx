@@ -59,29 +59,44 @@ const BookFormModel = ({ closeModel }) => {
   }, []);
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed bg-slate-300 shadow-lg shadow-slate-400 p-8 rounded-md w-96 h-auto">
-        <form>
+      <div className="bg-white shadow-lg rounded-lg p-8 w-96">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Add a New Book
+        </h2>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-1"
             htmlFor="title"
           >
             Title
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="text"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            required
           />
 
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-1 mt-4"
             htmlFor="author"
           >
             Author
           </label>
-          <select value={author} onChange={(e) => setAuthor(e.target.value)}>
+          <select
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            className="rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          >
             <option value="" disabled>
               Select an author
             </option>
@@ -94,20 +109,20 @@ const BookFormModel = ({ closeModel }) => {
           </select>
 
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
-            htmlFor="quantity"
+            className="block text-gray-700 text-sm font-semibold mb-1 mt-4"
+            htmlFor="image"
           >
             Select Image
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="file"
             id="image"
             onChange={handleFile}
           />
 
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-1 mt-4"
             htmlFor="category"
           >
             Category
@@ -115,6 +130,8 @@ const BookFormModel = ({ closeModel }) => {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            className="rounded-md border-2 border-gray-300 p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
           >
             <option value="" disabled>
               Select a category
@@ -127,26 +144,36 @@ const BookFormModel = ({ closeModel }) => {
           </select>
 
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-1 mt-4"
             htmlFor="isbn"
           >
             ISBN
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
             type="text"
             id="isbn"
             value={isbn}
             onChange={(e) => setIsbn(e.target.value)}
+            required
           />
-        </form>
 
-        <button
-          onClick={handleSubmit}
-          className="rounded-md bg-slate-300 p-2 hover:scale-105"
-        >
-          Proceed
-        </button>
+          <div className="flex justify-between mt-6">
+            <button
+              type="submit"
+              className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md transition-transform duration-200 transform hover:scale-105"
+            >
+              Proceed
+            </button>
+            <button
+              type="button"
+              onClick={closeModel}
+              className="flex-1 bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded-md transition-transform duration-200 transform hover:scale-105 ml-2"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

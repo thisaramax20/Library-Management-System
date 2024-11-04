@@ -29,36 +29,34 @@ const BookList = () => {
     <div>
       {model && <BookFormModel closeModel={triggerModel} />}
       <div
-        className={`bg-slate-100 rounded-md shadow-md shadow-slate-400 ${
+        className={`bg-slate-100 rounded-md shadow-lg transition-transform duration-200 ${
           model ? "blur-sm" : ""
         }`}
       >
-        <div className="flex justify-evenly">
-          <h3 className="text-2xl font-bold p-2">Books List</h3>
-          <div className="m-2">
-            <button
-              className="rounded-md bg-slate-300 p-2 hover:scale-105"
-              onClick={triggerModel}
-            >
-              Add New Book
-            </button>
-          </div>
+        <div className="flex justify-between items-center p-4">
+          <h3 className="text-2xl font-bold text-gray-800">Books List</h3>
+          <button
+            className="rounded-md bg-slate-300 px-4 py-2 hover:bg-slate-400 transition-colors duration-200"
+            onClick={triggerModel}
+          >
+            Add New Book
+          </button>
         </div>
 
-        <div className="flex justify-around">
-          <table className="table-auto text-left">
-            <thead>
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full text-left border-collapse">
+            <thead className="bg-gray-200">
               <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 border-b">
                   Book ID
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 border-b">
                   Title
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 border-b">
                   Author
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 border-b">
                   Available
                 </th>
               </tr>
@@ -66,19 +64,23 @@ const BookList = () => {
 
             <tbody>
               {data.map((book) => (
-                <tr key={book.id}>
-                  <td className="px-6 py-4">{book.id}</td>
-                  <td className="px-6 py-4">{book.title}</td>
-                  <td className="px-6 py-4">{book.authorName}</td>
-                  <td className="px-6 py-4">{book.state}</td>
+                <tr
+                  key={book.id}
+                  className="hover:bg-gray-100 transition-colors duration-200"
+                >
+                  <td className="px-6 py-4 border-b">{book.id}</td>
+                  <td className="px-6 py-4 border-b">{book.title}</td>
+                  <td className="px-6 py-4 border-b">{book.authorName}</td>
+                  <td className="px-6 py-4 border-b">{book.state}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
         <div className="flex justify-end m-5">
           <button
-            className="border-none text-red-500 hover:font-bold"
+            className="border-none text-red-500 hover:font-bold transition-all duration-200"
             onClick={() => navigate("/all-books")}
           >
             See All

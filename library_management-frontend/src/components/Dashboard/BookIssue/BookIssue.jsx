@@ -52,63 +52,63 @@ const BookIssue = () => {
       <Outlet />
       {model && <BookIssueModel closeModel={triggerModel} />}
       <div
-        className={`bg-slate-100 rounded-md shadow-md shadow-slate-400 ${
+        className={`bg-slate-100 rounded-md shadow-lg transition-transform duration-200 ${
           model ? "blur-sm" : ""
         }`}
       >
-        <div className="flex justify-evenly">
-          <h3 className="text-2xl font-bold p-2">Books Issued</h3>
-          <div className="m-2">
-            <button
-              className="rounded-md bg-slate-300 p-2 hover:scale-105"
-              onClick={triggerModel}
-            >
-              Issue a Book
-            </button>
-          </div>
+        <div className="flex justify-between items-center p-4">
+          <h3 className="text-2xl font-bold text-gray-800">Books Issued</h3>
+          <button
+            className="rounded-md bg-slate-300 px-4 py-2 hover:bg-slate-400 transition-colors duration-200"
+            onClick={triggerModel}
+          >
+            Issue a Book
+          </button>
         </div>
 
-        <div className="flex justify-around">
-          <table className="table-auto text-left">
-            <thead>
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full text-left border-collapse">
+            <thead className="bg-gray-200">
               <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 border-b">
                   User ID
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Book
+                <th scope="col" className="px-6 py-3 border-b">
+                  Book ID
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Issued on
+                <th scope="col" className="px-6 py-3 border-b">
+                  Issued On
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Return date
+                <th scope="col" className="px-6 py-3 border-b">
+                  Return Date
+                </th>
+                <th scope="col" className="px-6 py-3 border-b">
+                  Actions
                 </th>
               </tr>
             </thead>
 
             <tbody>
               {issueBooks.map((book) => (
-                <tr key={book.bookId}>
-                  <td className="px-6 py-4">{book.userId}</td>
-                  <td className="px-6 py-4">{book.bookId}</td>
-                  <td className="px-6 py-4">{book.issuedOn}</td>
-                  <td className="px-6 py-4">{book.expectedOn}</td>
-                  <td>
+                <tr
+                  key={book.bookId}
+                  className="hover:bg-gray-100 transition-colors duration-200"
+                >
+                  <td className="px-6 py-4 border-b">{book.userId}</td>
+                  <td className="px-6 py-4 border-b">{book.bookId}</td>
+                  <td className="px-6 py-4 border-b">{book.issuedOn}</td>
+                  <td className="px-6 py-4 border-b">{book.expectedOn}</td>
+                  <td className="px-6 py-4 border-b flex space-x-4">
                     <TiDelete
                       size={30}
-                      className="hover:cursor-pointer"
-                      color="red"
+                      className="hover:cursor-pointer hover:text-red-700 transition-colors duration-200"
                       onClick={() =>
                         deleteIssue(book.userId, book.bookId, book.issuedOn)
                       }
                     />
-                  </td>
-                  <td>
                     <TiTick
                       size={30}
-                      className="hover:cursor-pointer"
-                      color="green"
+                      className="hover:cursor-pointer hover:text-green-700 transition-colors duration-200"
                       onClick={() =>
                         markAsReturned(book.userId, book.bookId, book.issuedOn)
                       }
@@ -119,8 +119,9 @@ const BookIssue = () => {
             </tbody>
           </table>
         </div>
+
         <div className="flex justify-end m-5">
-          <button className="border-none text-red-500 hover:font-bold">
+          <button className="border-none text-red-500 hover:font-bold transition-all duration-200">
             See All
           </button>
         </div>

@@ -37,20 +37,33 @@ const BooksByCategory = () => {
       },
     ],
   };
+
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          boxWidth: 20,
+          font: {
+            size: 14,
+          },
+        },
       },
       title: {
         display: true,
         text: "Books by Category",
+        font: {
+          size: 18,
+          weight: "bold",
+        },
       },
     },
   };
+
   return (
-    <div className="h-96">
+    <div className="h-96 w-full">
       <Doughnut options={options} data={information} />
     </div>
   );

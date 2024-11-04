@@ -45,116 +45,142 @@ const UpdateUserModel = ({ closeModel }) => {
   }
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed bg-slate-300 shadow-lg shadow-slate-400 p-8 rounded-md w-96 h-auto">
+      <div className="bg-white shadow-lg rounded-lg p-8 w-96 h-auto">
+        <h2 className="text-xl font-bold text-center mb-4 text-gray-800">
+          User Management
+        </h2>
+
         <input
           type="text"
-          placeholder="search"
-          className="rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-300 p-2"
+          placeholder="Search"
+          className="rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 p-2 mb-4 w-full"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="w-full mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline transition duration-200"
           onClick={searchUser}
-        ></button>
+        >
+          Search
+        </button>
+
         <form>
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-2 mt-2"
             htmlFor="name"
           >
             Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
             type="text"
             id="name"
             name="name"
-            placeholder="name"
+            placeholder="Enter your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
+
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
             htmlFor="email"
           >
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
             type="email"
             id="email"
             name="email"
-            placeholder="email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
+
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
             htmlFor="address"
           >
             Address
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
             type="text"
             id="address"
             name="address"
-            placeholder="address"
+            placeholder="Enter your address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+            required
           />
+
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
             htmlFor="nic"
           >
             NIC
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
             type="text"
             id="nic"
             name="nic"
-            placeholder="nic"
+            placeholder="Enter NIC"
             value={nic}
             onChange={(e) => setNic(e.target.value)}
+            required
           />
+
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
             htmlFor="guardianNic"
           >
             Guardian NIC
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
             type="text"
             id="guardian-nic"
             name="guardian-nic"
-            placeholder="guardian nic"
+            placeholder="Enter Guardian NIC"
             value={guardianNic}
             onChange={(e) => setGuardianNic(e.target.value)}
           />
+
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-2"
             htmlFor="dob"
           >
             Date of Birth
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
             type="date"
             id="dob"
             name="dob"
-            placeholder="dob"
             value={dob}
             onChange={(e) => setDob(e.target.value)}
+            required
           />
-          <button
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Update
-          </button>
+
+          <div className="flex justify-between mt-4">
+            <button
+              className="rounded-3xl px-4 py-2 bg-blue-500 text-white font-semibold transition duration-200 hover:bg-blue-700"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Update
+            </button>
+            <button
+              className="rounded-3xl px-4 py-2 bg-red-500 text-white font-semibold transition duration-200 hover:bg-red-700"
+              type="button"
+              onClick={closeModel}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>

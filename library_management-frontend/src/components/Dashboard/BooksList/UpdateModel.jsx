@@ -49,37 +49,51 @@ const UpdateModel = ({ closeModel }) => {
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed bg-slate-300 shadow-lg shadow-slate-400 p-8 rounded-md w-96 h-auto">
+      <div className="bg-white shadow-lg rounded-lg p-8 w-96">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Update Book
+        </h2>
+
         <input
           type="text"
-          placeholder="search"
-          className="rounded-md border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-300 p-2"
+          placeholder="Search"
+          className="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-200"
           onClick={searchBook}
-        ></button>
-        <form>
+        >
+          Search
+        </button>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+          className="mt-6"
+        >
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-1"
             htmlFor="title"
           >
             Title
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
             type="text"
             id="title"
             name="title"
-            placeholder="title"
+            placeholder="Enter book title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            required
           />
 
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-semibold mb-1"
             htmlFor="category"
           >
             Category
@@ -87,6 +101,8 @@ const UpdateModel = ({ closeModel }) => {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
+            required
           >
             <option value="" disabled>
               Select a category
@@ -97,11 +113,21 @@ const UpdateModel = ({ closeModel }) => {
               </option>
             ))}
           </select>
-          <button
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-            onClick={handleSubmit}
-          ></button>
+
+          <div className="flex justify-between">
+            <button
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-200"
+              type="submit"
+            >
+              Update
+            </button>
+            <button
+              className="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded-md transition duration-200 ml-2"
+              onClick={closeModel}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>

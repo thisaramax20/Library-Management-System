@@ -6,43 +6,44 @@ import UsersJoin from "./UsersJoin";
 
 const Reports = () => {
   return (
-    <div>
-      <h1 className="text-4xl text-center font-bold">
-        View the statistics and Manage your library well
+    <div className="my-10">
+      <h1 className="text-4xl text-center font-bold mb-6">
+        View the Statistics and Manage Your Library Effectively
       </h1>
-      <div className="grid grid-cols-1 md:md:grid-cols-2 m-5">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 m-5">
         <div
-          className="m-5 shadow-lg shadow-slate-600 rounded-md z-50 bg-slate-200 p-5"
+          className="shadow-lg rounded-md bg-slate-200 p-5 transition-transform duration-200 hover:shadow-xl hover:scale-105"
           data-aos="fade-right"
         >
           <BooksByCategory />
         </div>
         <div
-          className="m-5 shadow-lg shadow-slate-600 rounded-md z-50 bg-slate-200 p-5"
+          className="shadow-lg rounded-md bg-slate-200 p-5 transition-transform duration-200 hover:shadow-xl hover:scale-105"
           data-aos="fade-left"
         >
           <CheckoutCountByCategory />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 m-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 m-5">
         <div
-          className="m-5 shadow-lg shadow-slate-600 rounded-md z-50 bg-slate-200 p-5"
+          className="shadow-lg rounded-md bg-slate-200 p-5 transition-transform duration-200 hover:shadow-xl hover:scale-105"
           data-aos="fade-right"
         >
           <TotalFineByMonth />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 m-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 m-5">
         <div
-          className="m-5 shadow-lg shadow-slate-600 rounded-md z-50 bg-slate-200 p-5"
+          className="shadow-lg rounded-md bg-slate-200 p-5 transition-transform duration-200 hover:shadow-xl hover:scale-105"
           data-aos="fade-right"
         >
           <UsersJoin />
         </div>
         <div
-          className="m-5 shadow-lg shadow-slate-600 rounded-md z-50 bg-slate-200 p-5"
+          className="shadow-lg rounded-md bg-slate-200 p-5 transition-transform duration-200 hover:shadow-xl hover:scale-105"
           data-aos="fade-left"
         >
           <LoginCountOfUsers />

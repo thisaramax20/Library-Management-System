@@ -34,31 +34,55 @@ const UsersJoin = () => {
     fetchData();
   }, []);
   const information = {
-    labels: data.map((item) => item.month).reverse((a, b) => a - b),
+    labels: data.map((item) => item.month).reverse(),
     datasets: [
       {
-        label: "New Users Join",
-        data: data.map((item) => item.count).reverse((a, b) => a - b),
+        label: "New Users Joined",
+        data: data.map((item) => item.count).reverse(),
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
+        hoverBackgroundColor: "rgba(75, 192, 192, 0.4)",
+        hoverBorderColor: "rgba(75, 192, 192, 1)",
       },
     ],
   };
+
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Number of Users",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Months",
+        },
+      },
+    },
     plugins: {
       legend: {
         position: "top",
       },
       title: {
         display: true,
-        text: "Monthly Users Join Count",
+        text: "Monthly User Join Count",
+        font: {
+          size: 18,
+          weight: "bold",
+        },
       },
     },
   };
+
   return (
-    <div>
+    <div className="h-96 w-full">
       <Bar options={options} data={information} />
     </div>
   );

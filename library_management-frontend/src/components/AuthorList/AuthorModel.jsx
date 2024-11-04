@@ -17,29 +17,41 @@ const AuthorModel = ({ closeModel }) => {
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="fixed bg-slate-300 shadow-lg shadow-slate-400 p-8 rounded-md w-96 h-auto">
+      <div className="bg-slate-200 shadow-lg rounded-lg p-6 w-80 mx-4">
+        <h2 className="text-lg font-semibold text-gray-800 text-center mb-4">
+          Enter Name
+        </h2>
         <form>
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 mt-2"
+            className="block text-gray-700 text-sm font-medium mb-2"
             htmlFor="name"
           >
             Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-blue-400"
+            className="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
             type="text"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name"
           />
         </form>
 
-        <button
-          onClick={handleSubmit}
-          className="rounded-md bg-slate-300 p-2 hover:scale-105"
-        >
-          Proceed
-        </button>
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={handleSubmit}
+            className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105 mr-2"
+          >
+            Proceed
+          </button>
+          <button
+            onClick={closeModel}
+            className="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105 ml-2"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

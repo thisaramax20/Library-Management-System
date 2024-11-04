@@ -22,21 +22,23 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/normal-issue" element={<NormalIssue />} />
-          <Route path="/pre-order" element={<PreOrder />} />
-          <Route path="/dashboard-user" element={<DashboardUser />} />
-          <Route path="*" element={<h1>Page Not Found</h1>} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/all-books" element={<AllBooks />} />
-          <Route path="/all-users" element={<AllUsers />} />
-          <Route path="/all-authors" element={<AllAuthors />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="mx-5">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Hero />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/normal-issue" element={<NormalIssue />} />
+            <Route path="/pre-order" element={<PreOrder />} />
+            <Route path="/dashboard-user" element={<DashboardUser />} />
+            <Route path="*" element={<h1>Page Not Found</h1>} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/all-books" element={<AllBooks />} />
+            <Route path="/all-users" element={<AllUsers />} />
+            <Route path="/all-authors" element={<AllAuthors />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 };

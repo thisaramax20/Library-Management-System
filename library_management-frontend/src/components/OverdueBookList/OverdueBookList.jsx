@@ -29,28 +29,28 @@ const OverdueBookList = () => {
   }
 
   return (
-    <div className="bg-slate-100 rounded-md shadow-md shadow-slate-400">
-      <div className="flex justify-start">
-        <h3 className="text-2xl font-bold p-2">Overdue Books List</h3>
+    <div className="bg-slate-100 rounded-md shadow-lg p-4">
+      <div className="flex justify-start mb-4">
+        <h3 className="text-2xl font-bold text-gray-800">Overdue Books List</h3>
       </div>
 
-      <div className="flex justify-around">
-        <table className="table-auto text-left">
-          <thead>
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full text-left border-collapse">
+          <thead className="bg-gray-200">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 border-b">
                 User ID
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 border-b">
                 User Name
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 border-b">
                 Book ID
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 border-b">
                 Title
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 border-b">
                 Overdue
               </th>
             </tr>
@@ -58,15 +58,19 @@ const OverdueBookList = () => {
 
           <tbody>
             {data.map((book) => (
-              <tr className="border-b" key={book.userId}>
-                <td className="px-6 py-4">{book.userName}</td>
-                <td className="px-6 py-4">{book.bookId}</td>
-                <td className="px-6 py-4">{book.bookTitle}</td>
-                <td className="px-6 py-4">{book.fine}</td>
-                <td className="px-6 py-4">
+              <tr
+                key={book.userId}
+                className="hover:bg-gray-100 transition-colors duration-200"
+              >
+                <td className="px-6 py-4 border-b">{book.userId}</td>
+                <td className="px-6 py-4 border-b">{book.userName}</td>
+                <td className="px-6 py-4 border-b">{book.bookId}</td>
+                <td className="px-6 py-4 border-b">{book.bookTitle}</td>
+                <td className="px-6 py-4 border-b">
                   <TiTick
+                    className="cursor-pointer text-green-500 hover:text-green-700 transition-colors duration-200"
                     onClick={() =>
-                      markAsReturned(data.userId, data.bookId, data.issuedOn)
+                      markAsReturned(book.userId, book.bookId, book.issuedOn)
                     }
                   />
                 </td>
@@ -75,8 +79,9 @@ const OverdueBookList = () => {
           </tbody>
         </table>
       </div>
+
       <div className="flex justify-end m-5">
-        <button className="border-none text-red-500 hover:font-bold">
+        <button className="border-none text-red-500 hover:font-bold transition-all duration-200">
           See All
         </button>
       </div>

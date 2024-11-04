@@ -39,10 +39,10 @@ const DashboardUser = () => {
       </div>
 
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-4 my-5">
+        <div className="grid grid-cols-1 my-5 md:flex justify-around">
           {filterData.map((name) => (
             <button
-              className="rounded-md bg-slate-300 p-2 hover:scale-105"
+              className="rounded-md bg-blue-500 text-white p-2 my-2 transition-transform duration-200 hover:scale-105 hover:bg-blue-600"
               key={name.name}
               onClick={() => handleFilterChange(name.name)}
             >
@@ -51,8 +51,8 @@ const DashboardUser = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 my-4">
-          {data.slice(sliceBottom, sliceTop).length != 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-4">
+          {data.slice(sliceBottom, sliceTop).length !== 0 ? (
             data
               .slice(sliceBottom, sliceTop)
               .map((card) => (
@@ -66,12 +66,15 @@ const DashboardUser = () => {
                 />
               ))
           ) : (
-            <h2 className="text-2xl text-center">End of the list... 🔚</h2>
+            <h2 className="text-2xl text-center text-gray-600 mt-10">
+              End of the list... 🔚
+            </h2>
           )}
         </div>
+
         <div className="flex justify-end my-4">
           <button
-            className="rounded-md bg-slate-300 p-2 hover:scale-105"
+            className="rounded-md bg-blue-500 text-white p-2 transition-transform duration-200 hover:scale-105 hover:bg-blue-600"
             onClick={() => {
               setData(data.slice(sliceBottom + 5, sliceTop + 5));
             }}

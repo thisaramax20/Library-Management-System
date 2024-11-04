@@ -1,6 +1,8 @@
 import BriefDetailCard from "./BriefDetailCard";
 import axios from "../../../api/axios";
 import { useEffect, useState } from "react";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const details = [
   {
@@ -19,6 +21,7 @@ const details = [
 
 const OverallDetails = () => {
   const [data, setData] = useState(details);
+  const navigate = useNavigate();
   // Fetching data from the API
   useEffect(() => {
     async function fetchData() {
@@ -46,20 +49,31 @@ const OverallDetails = () => {
     }
     fetchData();
   }, []);
+
+  const handleLogout = () => {
+    navigate("/login");
+  };
   return (
-    <div>
-      <div>
-        <h1 className="text-5xl font-bold">
-          Hello, <span className="text-red-600/60">Jack !</span>
-        </h1>
-        <h4 className="text-2xl mt-3">
-          {new Date().getDate()}.{new Date().getMonth() + 1}.
-          {new Date().getFullYear()} | {new Date().getHours()}:
-          {new Date().getMinutes()}
-        </h4>
+    <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
+      <div className="flex justify-between items-center mb-5">
+        <div className="flex-grow">
+          <h1 className="text-5xl font-bold text-gray-800">
+            Hello, <span className="text-red-600">Jack!</span>
+          </h1>
+          <h4 className="text-2xl mt-2 text-gray-600">
+            {new Date().getDate()}.{new Date().getMonth() + 1}.
+            {new Date().getFullYear()} | {new Date().getHours()}:
+            {new Date().getMinutes().toString().padStart(2, "0")}
+          </h4>
+        </div>
+        <RiLogoutBoxLine
+          size={50}
+          className="cursor-pointer text-red-600 transition-transform duration-200 hover:scale-110"
+          onClick={handleLogout}
+        />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:flex justify-around">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {data.map((card) => (
           <BriefDetailCard
             name={card.name}

@@ -34,19 +34,38 @@ const LoginCountOfUsers = () => {
     fetchData();
   }, []);
   const information = {
-    labels: data.map((item) => item.date).reverse((a, b) => a - b),
+    labels: data.map((item) => item.date).reverse(),
     datasets: [
       {
         label: "Login Activity by Users",
-        data: data.map((item) => item.count).reverse((a, b) => a - b),
+        data: data.map((item) => item.count).reverse(),
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
+        hoverBackgroundColor: "rgba(75, 192, 192, 0.4)",
+        hoverBorderColor: "rgba(75, 192, 192, 1)",
       },
     ],
   };
+
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Number of Logins",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Date",
+        },
+      },
+    },
     plugins: {
       legend: {
         position: "top",
@@ -54,11 +73,16 @@ const LoginCountOfUsers = () => {
       title: {
         display: true,
         text: "Daily Login Count of Users",
+        font: {
+          size: 18,
+          weight: "bold",
+        },
       },
     },
   };
+
   return (
-    <div>
+    <div className="h-96 w-full">
       <Bar options={options} data={information} />
     </div>
   );
