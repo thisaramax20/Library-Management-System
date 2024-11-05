@@ -11,6 +11,8 @@ const UpdateUserModel = ({ closeModel }) => {
   const [dob, setDob] = useState(user.dob);
   async function handleSubmit(e) {
     e.preventDefault();
+    if (user.id === null) console.log("kl");
+
     try {
       await axios.put(`/user/update`, {
         ...user,
@@ -64,7 +66,7 @@ const UpdateUserModel = ({ closeModel }) => {
           Search
         </button>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <label
             className="block text-gray-700 text-sm font-semibold mb-2 mt-2"
             htmlFor="name"
@@ -169,7 +171,6 @@ const UpdateUserModel = ({ closeModel }) => {
             <button
               className="rounded-3xl px-4 py-2 bg-blue-500 text-white font-semibold transition duration-200 hover:bg-blue-700"
               type="submit"
-              onClick={handleSubmit}
             >
               Update
             </button>

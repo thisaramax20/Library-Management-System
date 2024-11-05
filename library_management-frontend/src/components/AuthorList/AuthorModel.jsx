@@ -21,7 +21,7 @@ const AuthorModel = ({ closeModel }) => {
         <h2 className="text-lg font-semibold text-gray-800 text-center mb-4">
           Enter Name
         </h2>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <label
             className="block text-gray-700 text-sm font-medium mb-2"
             htmlFor="name"
@@ -34,24 +34,24 @@ const AuthorModel = ({ closeModel }) => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name"
+            placeholder="Enter name"
+            required
           />
+          <div className="flex justify-between mt-4">
+            <button
+              type="submit"
+              className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105 mr-2"
+            >
+              Proceed
+            </button>
+            <button
+              onClick={closeModel}
+              className="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105 ml-2"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
-
-        <div className="flex justify-between mt-4">
-          <button
-            onClick={handleSubmit}
-            className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105 mr-2"
-          >
-            Proceed
-          </button>
-          <button
-            onClick={closeModel}
-            className="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105 ml-2"
-          >
-            Cancel
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../../api/axios";
+import Popup from "../../PopupModel/Popup";
 
 const UserFormModel = ({ closeModel }) => {
   const [name, setName] = useState("");
@@ -8,8 +9,25 @@ const UserFormModel = ({ closeModel }) => {
   const [nic, setNic] = useState("");
   const [guardianNic, setGuardianNic] = useState("");
   const [dob, setDob] = useState("");
+  const [popupVisible, setPopupVisible] = useState(false);
+  const closePopup = () => setPopupVisible(!popupVisible);
   async function handleSubmit(e) {
     e.preventDefault();
+    if (
+      name === undefined ||
+      name === "" ||
+      address === undefined ||
+      address === "" ||
+      email === undefined ||
+      email === "" ||
+      dob === undefined ||
+      dob === "" ||
+      nic === undefined ||
+      nic === ""
+    ) {
+      closePopup();
+      return;
+    }
     try {
       const response = await axios.post("/user/save", {
         name,
@@ -30,6 +48,13 @@ const UserFormModel = ({ closeModel }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
+      {popupVisible && (
+        <Popup
+          title="Error"
+          content="All fields are required."
+          closePopup={closePopup}
+        />
+      )}
       <div className="bg-white shadow-lg rounded-lg p-8 w-96">
         <form onSubmit={handleSubmit}>
           <h2 className="text-xl font-bold text-center mb-4 text-gray-800">

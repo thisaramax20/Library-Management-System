@@ -23,6 +23,8 @@ const UpdateModel = ({ closeModel }) => {
     try {
       const response = await axios.get(`/book/get-by-id/${searchTerm}`);
       if (response?.data) {
+        console.log(response);
+
         setTitle(response.data.title);
         setCategory(response.data.category);
         book = response.data;
@@ -70,8 +72,7 @@ const UpdateModel = ({ closeModel }) => {
 
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
+            handleSubmit(e);
           }}
           className="mt-6"
         >

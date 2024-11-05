@@ -17,6 +17,9 @@ const DeleteAuthorModel = ({ closeModel }) => {
     }
   }
   async function deleteAuthor() {
+    if (!author.authorId) {
+      return;
+    }
     try {
       await axios.delete(`/author/delete-by-id/${author.authorId}`);
       alert("Author deleted successfully");
@@ -62,6 +65,7 @@ const DeleteAuthorModel = ({ closeModel }) => {
           placeholder="Author Name"
           value={name}
           disabled
+          required
         />
 
         <button

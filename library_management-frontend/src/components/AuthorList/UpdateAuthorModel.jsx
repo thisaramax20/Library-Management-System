@@ -52,7 +52,7 @@ export const UpdateAuthorModel = ({ closeModel }) => {
           Search
         </button>
 
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={(e) => handleSubmit(e)}>
           <label
             htmlFor="name"
             className="block text-gray-700 text-sm font-medium mb-2"
@@ -66,13 +66,11 @@ export const UpdateAuthorModel = ({ closeModel }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter name"
+            required
           />
 
           <div className="flex justify-between mt-4">
-            <button
-              onClick={handleSubmit}
-              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-150 mr-2"
-            >
+            <button className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-150 mr-2">
               Update
             </button>
             <button

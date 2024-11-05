@@ -114,7 +114,6 @@ const AllBooks = () => {
                 data.map((book) => (
                   <tr
                     key={book.id}
-                    onClick={() => handleRowClick(book)}
                     className="hover:bg-gray-100 cursor-pointer transition duration-150"
                   >
                     <td className="px-4 py-2 border-t border-gray-300">

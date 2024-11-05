@@ -66,8 +66,7 @@ const BookFormModel = ({ closeModel }) => {
 
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
+            handleSubmit(e);
           }}
         >
           <label
