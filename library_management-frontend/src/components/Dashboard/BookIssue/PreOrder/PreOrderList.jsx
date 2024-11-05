@@ -15,11 +15,11 @@ const PreOrderList = ({ preOrderList }) => {
 
   async function processIssue(userId, bookId) {
     try {
-      const response = await axios.post("/pre-order/save", {
+      const response = await axios.post("/issue-books/save", {
         userId,
         bookId,
       });
-      if (response.data) {
+      if (response.statusCode === 200) {
         alert("Issue processed successfully!");
         getAllPreOrders();
       }
@@ -51,7 +51,6 @@ const PreOrderList = ({ preOrderList }) => {
                 Title
               </th>
               <th scope="col" className="px-6 py-3 border-b"></th>{" "}
-              {/* Empty header for icons */}
             </tr>
           </thead>
           <tbody>
@@ -62,13 +61,13 @@ const PreOrderList = ({ preOrderList }) => {
               >
                 <td className="px-6 py-4 border-b">{preOrder.userId}</td>
                 <td className="px-6 py-4 border-b">{preOrder.userName}</td>
-                <td className="px-6 py-4 border-b">{preOrder.bookId}</td>
+                <td className="px-6 py-4 border-b">{preOrder.bookCode}</td>
                 <td className="px-6 py-4 border-b">{preOrder.bookTitle}</td>
                 <td className="px-6 py-4 border-b text-center">
                   <GiConfirmed
                     className="text-green-500 hover:text-green-700 hover:cursor-pointer transition-colors"
                     onClick={() =>
-                      processIssue(preOrder.userId, preOrder.bookId)
+                      processIssue(preOrder.userId, preOrder.bookCode)
                     }
                   />
                 </td>
@@ -76,12 +75,6 @@ const PreOrderList = ({ preOrderList }) => {
             ))}
           </tbody>
         </table>
-      </div>
-
-      <div className="flex justify-center mt-5">
-        <button className="border-2 border-slate-600 px-8 py-3 rounded-md text-white bg-slate-600 hover:bg-slate-900 transition-colors">
-          Proceed with Issue
-        </button>
       </div>
     </div>
   );

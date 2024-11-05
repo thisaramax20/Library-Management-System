@@ -2,6 +2,7 @@ import BookCard from "./BookCard/BookCard";
 import UserDetails from "./UserDetails/UserDetails";
 import axios from "../../api/axios";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const filterData = [
   { name: "Fantasy", api: "/book/get-by-category/Fiction" },
@@ -14,11 +15,16 @@ let sliceBottom = 0;
 let sliceTop = 5;
 
 const DashboardUser = () => {
+  const location = useLocation();
   const [data, setData] = useState([]);
   const [changedFilter, setChangedFilter] = useState(null);
   const handleFilterChange = (filter) => {
     setChangedFilter(filterData.filter((item) => item.name === filter));
   };
+
+  const queryParams = new URLSearchParams(location.search);
+  const name = queryParams.get("name");
+  const username = queryParams.get("username");
 
   useEffect(() => {
     async function fetchData() {
@@ -35,7 +41,7 @@ const DashboardUser = () => {
   return (
     <div className="mx-4">
       <div className="my-5">
-        <UserDetails />
+        <UserDetails name={name} />
       </div>
 
       <div>
@@ -63,6 +69,8 @@ const DashboardUser = () => {
                   img={card.src}
                   key={card.id}
                   bookCode={card.bookCode}
+                  userId={username}
+                  state={card.state}
                 />
               ))
           ) : (

@@ -1,12 +1,20 @@
 import axios from "../../../api/axios";
 
-const BookCard = ({ name, author, img, genre, bookCode, userId }) => {
+const BookCard = ({ name, author, img, genre, bookCode, userId, state }) => {
   async function preOrder() {
+    if (state === "pre-ordered" || state === "ongoing") {
+      alert("This book is currently unavailable.");
+      return;
+    }
     try {
       const response = await axios.post("/pre-order/save", {
         bookCode,
         userId,
       });
+
+      if (response.status === 200) {
+        alert("Pre-order saved successfully!");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -30,6 +38,7 @@ const BookCard = ({ name, author, img, genre, bookCode, userId }) => {
         >
           Pre Order
         </button>
+        <h1>{state}</h1>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const SearchUser = ({ setUser }) => {
   async function searchUser() {
     try {
       const response = await axios.get(`/user/get-by-username/${searchText}`);
-      if (response?.data) setUserList(response.data);
+      if (response?.data) setUserList([response.data]);
       setSearchText("");
     } catch (error) {
       console.error(error);

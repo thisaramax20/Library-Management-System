@@ -59,7 +59,7 @@ const SearchBook = ({ setBook }) => {
               <tr className="hover:bg-gray-200 transition duration-200">
                 <td className="px-6 py-3">{bookData.id}</td>
                 <td className="px-6 py-3">{bookData.title}</td>
-                <td className="px-6 py-3">{bookData.author}</td>
+                <td className="px-6 py-3">{bookData.authorName}</td>
                 {bookData.state !== "issued" && (
                   <td className="px-6 py-3">
                     <BiSolidBookAdd
