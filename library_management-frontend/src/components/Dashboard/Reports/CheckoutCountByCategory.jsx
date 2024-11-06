@@ -67,7 +67,7 @@ const CheckoutCountByCategory = () => {
       },
       title: {
         display: true,
-        text: "Books by Category",
+        text: "Checkouts by Category",
         font: {
           size: 18,
           weight: "bold",

@@ -5,6 +5,7 @@ import { BiBookReader } from "react-icons/bi";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
+
   return (
     <>
       <ToggleNavbar show={show} toggleShow={toggleShow} />

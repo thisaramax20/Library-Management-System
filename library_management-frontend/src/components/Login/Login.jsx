@@ -13,8 +13,18 @@ const Login = () => {
     setUsername(value);
   };
   async function handleSubmit() {
+    if (username === "" || password === "") {
+      alert("Please enter username and password");
+      return;
+    }
+    let url = "";
+    if (username.startsWith("AD")) {
+      url = "/admin/validate-login";
+    } else if (username.startsWith("US")) {
+      url = "/user/validate-login";
+    }
     try {
-      const response = await axios.post("/user/validate-login", null, {
+      const response = await axios.post(url, null, {
         params: {
           username,
           password,
@@ -23,7 +33,11 @@ const Login = () => {
       if (response.status === 200) {
         const data = response.data;
         if (data.auth === "yes") {
-          navigate(`/dashboard-user?name=${data.name}&username=${username}`);
+          if (data.type === "US") {
+            navigate(`/dashboard-user?name=${data.name}&username=${username}`);
+          } else if (data.type === "AD") {
+            navigate(`/dashboard?name=${data.name}`);
+          }
           localStorage.setItem("token", data);
         } else if (data.message === "password incorrect") {
           alert("Password incorrect");

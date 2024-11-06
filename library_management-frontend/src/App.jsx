@@ -13,6 +13,8 @@ import Reports from "./components/Dashboard/Reports/Reports";
 import AllBooks from "./components/Dashboard/BooksList/AllBooks";
 import AllUsers from "./components/Dashboard/UsersList/AllUsers";
 import AllAuthors from "./components/AuthorList/AllAuthors";
+import Footer from "./components/Footer/Footer";
+import AdminList from "./components/Admin/AdminList";
 
 const App = () => {
   useEffect(() => {
@@ -36,9 +38,11 @@ const App = () => {
             <Route path="/all-books" element={<AllBooks />} />
             <Route path="/all-users" element={<AllUsers />} />
             <Route path="/all-authors" element={<AllAuthors />} />
+            <Route path="/all-admins" element={<AdminList />} />
           </Routes>
         </BrowserRouter>
       </div>
+      <Footer />
     </div>
   );
 };
