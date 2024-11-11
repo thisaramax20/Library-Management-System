@@ -10,7 +10,7 @@ import UserList from "./UsersList/UserList";
 const Dashboard = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const adminName = queryParams.get("admin");
+  const adminName = queryParams.get("name");
   return (
     <div>
       <OverallDetails adminName={adminName} />

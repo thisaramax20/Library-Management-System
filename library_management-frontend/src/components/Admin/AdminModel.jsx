@@ -1,17 +1,13 @@
 import { useState } from "react";
 import axios from "../../api/axios";
-import Popup from "../PopupModel/Popup";
+import Swal from "sweetalert2";
 
 const AdminModel = ({ closeModel }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [nic, setNic] = useState("");
   const [dob, setDob] = useState("");
-  const [popup, setPopup] = useState(false);
-  const [popupDetails, setPopupDetails] = useState({});
-  const handlePopup = () => {
-    setPopup(true);
-  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -25,29 +21,25 @@ const AdminModel = ({ closeModel }) => {
         setName("");
         setAddress("");
         setNic("");
-        setPopupDetails({
-          title: "Success",
-          content: "Admin added successfully!",
-          type: "success",
+        Swal.fire({
+          icon: "success",
+          title: "OK!",
+          text: "Admin has been saved...!",
         });
-        handlePopup();
         closeModel();
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="bg-slate-200 shadow-lg rounded-lg p-6 w-80 mx-4">
-        {popup && (
-          <Popup
-            title={popupDetails.title}
-            content={popupDetails.content}
-            type={popupDetails.type}
-            closePopup={handlePopup}
-          />
-        )}
         <h2 className="text-lg font-semibold text-gray-800 text-center mb-4">
           Enter Name
         </h2>

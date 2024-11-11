@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "../../../api/axios";
-import Popup from "../../PopupModel/Popup";
+import Swal from "sweetalert2";
 
 const UserFormModel = ({ closeModel }) => {
   const [name, setName] = useState("");
@@ -9,8 +9,6 @@ const UserFormModel = ({ closeModel }) => {
   const [nic, setNic] = useState("");
   const [guardianNic, setGuardianNic] = useState("");
   const [dob, setDob] = useState("");
-  const [popupVisible, setPopupVisible] = useState(false);
-  const closePopup = () => setPopupVisible(!popupVisible);
   async function handleSubmit(e) {
     e.preventDefault();
     if (
@@ -25,7 +23,6 @@ const UserFormModel = ({ closeModel }) => {
       nic === undefined ||
       nic === ""
     ) {
-      closePopup();
       return;
     }
     try {
@@ -38,23 +35,25 @@ const UserFormModel = ({ closeModel }) => {
         dob,
       });
       if (response?.status === 201) {
+        Swal.fire({
+          icon: "success",
+          title: "OK!",
+          text: "User has been saved...!",
+        });
         closeModel();
-        alert("User added successfully!");
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
-      {popupVisible && (
-        <Popup
-          title="Error"
-          content="All fields are required."
-          closePopup={closePopup}
-        />
-      )}
       <div className="bg-white shadow-lg rounded-lg p-8 w-96">
         <form onSubmit={handleSubmit}>
           <h2 className="text-xl font-bold text-center mb-4 text-gray-800">

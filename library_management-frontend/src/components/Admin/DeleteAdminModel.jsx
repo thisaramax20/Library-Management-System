@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "../../api/axios";
+import Swal from "sweetalert2";
+
 let admin = {};
 const DeleteAdminModel = ({ closeModel }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -10,24 +12,53 @@ const DeleteAdminModel = ({ closeModel }) => {
       if (response?.data) {
         setName(response.data.name);
         admin = response.data;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
       }
       setSearchTerm("");
     } catch (error) {
       console.error(error);
     }
   }
-  async function deleteAuthor() {
+  function deleteAuthor() {
     if (!admin.id) {
       return;
     }
-    try {
-      await axios.delete(`/admin/delete/${admin.username}`);
-      alert("Author deleted successfully");
-      setSearchTerm("");
-      closeModel();
-    } catch (error) {
-      console.error(error);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await axios.delete(`/admin/delete/${admin.username}`);
+          if (result.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+          setSearchTerm("");
+          closeModel();
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            title: "error",
+            text: "Oops.",
+            icon: "Something went wrong...!",
+          });
+        }
+      }
+    });
   }
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">

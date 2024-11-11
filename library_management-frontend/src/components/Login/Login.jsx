@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const [username, setUsername] = useState("LB-0001");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleClickPassword = (value) => {
@@ -14,7 +15,11 @@ const Login = () => {
   };
   async function handleSubmit() {
     if (username === "" || password === "") {
-      alert("Please enter username and password");
+      Swal.fire({
+        icon: "error",
+        title: "Sorry...",
+        text: "You must enter a valid username & password...!",
+      });
       return;
     }
     let url = "";
@@ -24,6 +29,8 @@ const Login = () => {
       url = "/user/validate-login";
     }
     try {
+      console.log(username, password);
+
       const response = await axios.post(url, null, {
         params: {
           username,
@@ -40,9 +47,17 @@ const Login = () => {
           }
           localStorage.setItem("token", data);
         } else if (data.message === "password incorrect") {
-          alert("Password incorrect");
+          Swal.fire({
+            icon: "error",
+            title: "Sorry...",
+            text: "Your password is incorrect!",
+          });
         } else {
-          alert("Invalid credentials");
+          Swal.fire({
+            icon: "error",
+            title: "Sorry...",
+            text: "Check your credentials again...!",
+          });
         }
       }
     } catch (error) {

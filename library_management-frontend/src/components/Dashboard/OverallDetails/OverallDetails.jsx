@@ -58,7 +58,7 @@ const OverallDetails = ({ adminName }) => {
       <div className="flex justify-between items-center mb-5">
         <div className="flex-grow">
           <h1 className="text-5xl font-bold text-gray-800">
-            Hello, <span className="text-red-600">J{adminName}!</span>
+            Hello, <span className="text-red-600">{adminName}!</span>
           </h1>
           <h4 className="text-2xl mt-2 text-gray-600">
             {new Date().getDate()}.{new Date().getMonth() + 1}.

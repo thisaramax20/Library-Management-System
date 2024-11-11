@@ -1,18 +1,31 @@
 import { useState } from "react";
 import axios from "../../api/axios";
+import Swal from "sweetalert2";
+
 let admin = {};
 const UpdateAdminModel = ({ closeModel }) => {
   const [name, setName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  async function searchBook() {
+  async function searchAdmin() {
     try {
       const response = await axios.get(`/admin/get-by-id/${searchTerm}`);
       if (response?.data) {
         setName(response.data.name);
         admin = response.data;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong...!",
+      });
     }
   }
   const handleSubmit = async (e) => {
@@ -24,10 +37,20 @@ const UpdateAdminModel = ({ closeModel }) => {
       });
       if (response.status === 200) {
         setName("");
+        Swal.fire({
+          icon: "success",
+          title: "OK...",
+          text: "Changes has been updated...!",
+        });
         closeModel();
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
   return (
@@ -47,7 +70,7 @@ const UpdateAdminModel = ({ closeModel }) => {
 
         <button
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded transition duration-150"
-          onClick={searchBook}
+          onClick={searchAdmin}
         >
           Search
         </button>
