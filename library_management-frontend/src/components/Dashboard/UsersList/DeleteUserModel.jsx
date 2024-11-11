@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../../api/axios";
+import Swal from "sweetalert2";
 let user = {};
 const DeleteUserModel = ({ closeModel }) => {
   const [name, setName] = useState("");
@@ -11,19 +12,51 @@ const DeleteUserModel = ({ closeModel }) => {
         setName(response.data.name);
         user = response.data;
         setSearchTerm("");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
       }
     } catch (error) {
       console.error(error);
     }
   }
-  async function deleteUser() {
-    try {
-      await axios.delete(`/user/delete/${user.username}`);
-      alert("User deleted successfully!");
-      closeModel();
-    } catch (error) {
-      console.error(error);
+  function deleteUser() {
+    if (!user.id) {
+      return;
     }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await axios.delete(`/user/delete/${user.username}`);
+          if (result.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Admin has been deleted.",
+              icon: "success",
+            });
+          }
+          closeModel();
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            title: "error",
+            text: "Oops.",
+            icon: "Something went wrong...!",
+          });
+        }
+      }
+    });
   }
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">

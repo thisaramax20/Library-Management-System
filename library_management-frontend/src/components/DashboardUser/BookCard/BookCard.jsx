@@ -1,9 +1,14 @@
 import axios from "../../../api/axios";
+import Swal from "sweetalert2";
 
 const BookCard = ({ name, author, img, genre, bookCode, userId, state }) => {
   async function preOrder() {
     if (state === "pre-ordered" || state === "ongoing") {
-      alert("This book is currently unavailable.");
+      Swal.fire({
+        icon: "error",
+        title: "Sorry...",
+        text: "This book is currently not available...!",
+      });
       return;
     }
     try {
@@ -13,7 +18,11 @@ const BookCard = ({ name, author, img, genre, bookCode, userId, state }) => {
       });
 
       if (response.status === 200) {
-        alert("Pre-order saved successfully!");
+        Swal.fire({
+          icon: "success",
+          title: "OK...",
+          text: "Pre Order placed successfully...!",
+        });
       }
     } catch (error) {
       console.error(error);

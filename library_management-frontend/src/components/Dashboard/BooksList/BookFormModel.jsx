@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../../../api/axios";
+import Swal from "sweetalert2";
 const categoryList = [
   {
     id: 1,
@@ -37,10 +38,20 @@ const BookFormModel = ({ closeModel }) => {
     try {
       const response = await axios.post("/book/save", formData);
       if (response.status === 201) {
+        Swal.fire({
+          icon: "success",
+          title: "OK!",
+          text: "Book has been saved...!",
+        });
         closeModel();
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
   const [authorList, setAuthorList] = useState([]);

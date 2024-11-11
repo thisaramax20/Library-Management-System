@@ -1,4 +1,5 @@
 import axios from "../../../../api/axios";
+import Swal from "sweetalert2";
 
 const ProceedIssue = ({ user, book }) => {
   async function handleIssue() {
@@ -7,8 +8,20 @@ const ProceedIssue = ({ user, book }) => {
         userId: user.username,
         bookId: book.bookCode,
       });
+      if (response.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "OK...",
+          text: "Book issued successful...!",
+        });
+      }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "An error occurred while issuing the book. Please try again later.",
+      });
     }
   }
 

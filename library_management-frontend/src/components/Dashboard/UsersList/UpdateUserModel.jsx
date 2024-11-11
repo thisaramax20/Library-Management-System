@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../../api/axios";
+import Swal from "sweetalert2";
 let user = {};
 const UpdateUserModel = ({ closeModel }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,10 +12,9 @@ const UpdateUserModel = ({ closeModel }) => {
   const [dob, setDob] = useState(user.dob);
   async function handleSubmit(e) {
     e.preventDefault();
-    if (user.id === null) console.log("kl");
 
     try {
-      await axios.put(`/user/update`, {
+      const result = await axios.put(`/user/update`, {
         ...user,
         name,
         address,
@@ -23,10 +23,21 @@ const UpdateUserModel = ({ closeModel }) => {
         guardianNic,
         dob,
       });
-      alert("User updated successfully!");
+      if (result.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "OK...",
+          text: "Changes has been updated...!",
+        });
+      }
       closeModel();
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   }
   async function searchUser() {
@@ -40,6 +51,12 @@ const UpdateUserModel = ({ closeModel }) => {
         setNic(user.nic);
         setGuardianNic(user.guardianNic);
         setDob(user.dob);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
       }
     } catch (error) {
       console.error(error);

@@ -2,6 +2,7 @@ import { IoSearchCircleSharp } from "react-icons/io5";
 import { BiSolidBookAdd } from "react-icons/bi";
 import { useState } from "react";
 import axios from "../../../../api/axios";
+import Swal from "sweetalert2";
 
 const SearchBook = ({ setBook }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -10,8 +11,16 @@ const SearchBook = ({ setBook }) => {
   async function handleSearch() {
     try {
       const response = await axios.get(`/book/get-by-id/${searchTerm}`);
-      if (response?.data) setBookData(response.data);
-      setSearchTerm("");
+      if (response?.data) {
+        setBookData(response.data);
+        setSearchTerm("");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no book by that ID...!",
+        });
+      }
     } catch (error) {
       console.error(error);
     }

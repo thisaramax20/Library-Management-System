@@ -2,6 +2,7 @@ import { IoSearchCircleSharp } from "react-icons/io5";
 import { IoMdPersonAdd } from "react-icons/io";
 import { useState } from "react";
 import axios from "../../../../api/axios";
+import Swal from "sweetalert2";
 
 const SearchUser = ({ setUser }) => {
   const [searchText, setSearchText] = useState("");
@@ -10,8 +11,16 @@ const SearchUser = ({ setUser }) => {
   async function searchUser() {
     try {
       const response = await axios.get(`/user/get-by-username/${searchText}`);
-      if (response?.data) setUserList([response.data]);
-      setSearchText("");
+      if (response?.data) {
+        setUserList([response.data]);
+        setSearchText("");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
+      }
     } catch (error) {
       console.error(error);
     }

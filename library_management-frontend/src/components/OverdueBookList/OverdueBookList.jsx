@@ -64,7 +64,7 @@ const OverdueBookList = () => {
               >
                 <td className="px-6 py-4 border-b">{book.userId}</td>
                 <td className="px-6 py-4 border-b">{book.userName}</td>
-                <td className="px-6 py-4 border-b">{book.bookId}</td>
+                <td className="px-6 py-4 border-b">{book.bookCode}</td>
                 <td className="px-6 py-4 border-b">{book.bookTitle}</td>
                 <td className="px-6 py-4 border-b">
                   <TiTick

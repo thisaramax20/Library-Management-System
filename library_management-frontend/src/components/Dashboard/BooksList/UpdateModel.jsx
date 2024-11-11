@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../../api/axios";
+import Swal from "sweetalert2";
 const categoryList = [
   {
     id: 1,
@@ -23,14 +24,23 @@ const UpdateModel = ({ closeModel }) => {
     try {
       const response = await axios.get(`/book/get-by-id/${searchTerm}`);
       if (response?.data) {
-        console.log(response);
-
         setTitle(response.data.title);
         setCategory(response.data.category);
         book = response.data;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no book by that ID...!",
+        });
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong...!",
+      });
     }
   }
   const handleSubmit = async (e) => {
@@ -43,6 +53,11 @@ const UpdateModel = ({ closeModel }) => {
       });
       if (response.status === 200) {
         setTitle("");
+        Swal.fire({
+          icon: "success",
+          title: "OK...",
+          text: "Changes has been updated...!",
+        });
         closeModel();
       }
     } catch (error) {

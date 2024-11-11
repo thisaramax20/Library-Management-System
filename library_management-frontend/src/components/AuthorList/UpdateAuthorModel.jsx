@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../api/axios";
+import Swal from "sweetalert2";
 let author = {};
 export const UpdateAuthorModel = ({ closeModel }) => {
   const [name, setName] = useState("");
@@ -10,9 +11,20 @@ export const UpdateAuthorModel = ({ closeModel }) => {
       if (response?.data) {
         setName(response.data.name);
         author = response.data;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong...!",
+      });
     }
   }
   const handleSubmit = async (e) => {
@@ -24,10 +36,20 @@ export const UpdateAuthorModel = ({ closeModel }) => {
       });
       if (response.status === 200) {
         setName("");
+        Swal.fire({
+          icon: "success",
+          title: "OK...",
+          text: "Changes has been updated...!",
+        });
         closeModel();
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
   return (

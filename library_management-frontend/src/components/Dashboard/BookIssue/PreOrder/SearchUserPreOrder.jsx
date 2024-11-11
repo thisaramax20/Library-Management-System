@@ -2,6 +2,7 @@ import { IoSearchCircleSharp } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import axios from "../../../../api/axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const SearchUserPreOrder = ({ setPreOrderList }) => {
   const [searchText, setSearchText] = useState("");
@@ -10,7 +11,14 @@ const SearchUserPreOrder = ({ setPreOrderList }) => {
   async function searchPreOrder() {
     try {
       const response = await axios.get(`pre-order/get-by-userId/${searchText}`);
-      setData(response.data);
+      if (response.data) {
+        setData(response.data);
+      } else {
+        Swal.fire({
+          title: "No user found",
+          icon: "error",
+        });
+      }
     } catch (error) {
       console.error(error);
     }

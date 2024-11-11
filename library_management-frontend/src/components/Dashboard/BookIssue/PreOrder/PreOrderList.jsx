@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../../../../api/axios";
 import { GiConfirmed } from "react-icons/gi";
+import Swal from "sweetalert2";
 
 const PreOrderList = ({ preOrderList }) => {
   const [data, setData] = useState([]);
@@ -20,11 +21,20 @@ const PreOrderList = ({ preOrderList }) => {
         bookId,
       });
       if (response.statusCode === 200) {
-        alert("Issue processed successfully!");
+        Swal.fire({
+          icon: "success",
+          title: "OK...",
+          text: "Book issued successfully...!",
+        });
         getAllPreOrders();
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong...!",
+      });
     }
   }
 

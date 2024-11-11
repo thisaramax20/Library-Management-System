@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../api/axios";
+import Swal from "sweetalert2";
 let author = {};
 const DeleteAuthorModel = ({ closeModel }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -10,24 +11,60 @@ const DeleteAuthorModel = ({ closeModel }) => {
       if (response?.data) {
         setName(response.data.name);
         author = response.data;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
       }
       setSearchTerm("");
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        title: "error",
+        text: "Oops.",
+        icon: "Something went wrong...!",
+      });
     }
   }
-  async function deleteAuthor() {
+  function deleteAuthor() {
     if (!author.authorId) {
       return;
     }
-    try {
-      await axios.delete(`/author/delete-by-id/${author.authorId}`);
-      alert("Author deleted successfully");
-      setSearchTerm("");
-      closeModel();
-    } catch (error) {
-      console.error(error);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.delete(
+            `/author/delete-by-id/${author.authorId}`
+          );
+          if (response.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Author has been deleted.",
+              icon: "success",
+            });
+            setSearchTerm("");
+            closeModel();
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            title: "error",
+            text: "Oops.",
+            icon: "Something went wrong...!",
+          });
+        }
+      }
+    });
   }
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">

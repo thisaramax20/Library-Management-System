@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../../api/axios";
+import Swal from "sweetalert2";
 let book = {};
 const DeleteModel = ({ closeModel }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,19 +13,49 @@ const DeleteModel = ({ closeModel }) => {
         setTitle(response.data.title);
         book = response.data;
         setBookFound(true);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sorry...",
+          text: "There is no one by that ID...!",
+        });
       }
     } catch (error) {
       console.error(error);
     }
   }
-  async function deleteBook() {
-    try {
-      await axios.delete(`/book/delete/${book.bookCode}`);
-      alert("Book deleted successfully!");
-      closeModel();
-    } catch (error) {
-      console.error(error);
+  function deleteBook() {
+    if (!book.id) {
+      return;
     }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`/book/delete/${book.bookCode}`);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Book has been deleted.",
+            icon: "success",
+          });
+          closeModel();
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            title: "error",
+            text: "Oops.",
+            icon: "Something went wrong...!",
+          });
+        }
+      }
+    });
   }
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">

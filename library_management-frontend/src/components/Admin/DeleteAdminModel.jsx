@@ -22,6 +22,11 @@ const DeleteAdminModel = ({ closeModel }) => {
       setSearchTerm("");
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        title: "error",
+        text: "Oops.",
+        icon: "Something went wrong...!",
+      });
     }
   }
   function deleteAuthor() {
@@ -43,7 +48,7 @@ const DeleteAdminModel = ({ closeModel }) => {
           if (result.status === 200) {
             Swal.fire({
               title: "Deleted!",
-              text: "Your file has been deleted.",
+              text: "Admin has been deleted.",
               icon: "success",
             });
           }
@@ -52,9 +57,9 @@ const DeleteAdminModel = ({ closeModel }) => {
         } catch (error) {
           console.error(error);
           Swal.fire({
-            title: "error",
-            text: "Oops.",
-            icon: "Something went wrong...!",
+            title: "Oops",
+            text: "Something went wrong...!",
+            icon: "error",
           });
         }
       }

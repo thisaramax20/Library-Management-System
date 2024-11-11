@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "../../api/axios";
+import Swal from "sweetalert2";
 
 const AuthorModel = ({ closeModel }) => {
   const [name, setName] = useState("");
@@ -9,10 +10,20 @@ const AuthorModel = ({ closeModel }) => {
       const response = await axios.post("/author/save", { name });
       if (response.status === 201) {
         setName("");
+        Swal.fire({
+          icon: "success",
+          title: "OK!",
+          text: "Admin has been saved...!",
+        });
         closeModel();
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
   return (

@@ -4,6 +4,7 @@ import BookIssueModel from "./BookIssueModel";
 import { Outlet } from "react-router-dom";
 import { TiDelete } from "react-icons/ti";
 import { TiTick } from "react-icons/ti";
+import Swal from "sweetalert2";
 
 const BookIssue = () => {
   const [model, setModel] = useState(false);
@@ -21,32 +22,77 @@ const BookIssue = () => {
     }
     fetchIssueBooks();
   }, []);
-  async function markAsReturned(userId, bookId, issuedOn) {
-    try {
-      await axios.post("/issue-books/mark-received", {
-        userId,
-        bookId,
-        issuedOn,
-      });
-      alert("Book returned successfully!");
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  async function deleteIssue(userId, bookId, issuedOn) {
-    try {
-      await axios.post("/issue-books/delete", {
-        userId,
-        bookId,
-        issuedOn,
-      });
 
-      alert("Book Issue deleted successfully!");
-    } catch (error) {
-      console.error(error);
-    }
+  function markAsReturned(userId, bookId, issuedOn) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Mark it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.post("/issue-books/mark-received", {
+            userId,
+            bookId,
+            issuedOn,
+          });
+          if (response.statusCode === 200) {
+            Swal.fire({
+              title: "success",
+              text: "Issue has been marked success.",
+              icon: "success",
+            });
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            title: "Oops",
+            text: "Something went wrong...!",
+            icon: "error",
+          });
+        }
+      }
+    });
   }
-
+  function deleteIssue(userId, bookId, issuedOn) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.post("/issue-books/delete", {
+            userId,
+            bookId,
+            issuedOn,
+          });
+          if (response.statusCode === 200) {
+            Swal.fire({
+              title: "success",
+              text: "Issue has been deleted.",
+              icon: "success",
+            });
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire({
+            title: "Oops",
+            text: "Something went wrong...!",
+            icon: "error",
+          });
+        }
+      }
+    });
+  }
   return (
     <div>
       <Outlet />
