@@ -1,10 +1,12 @@
 import { useState } from "react";
 import ToggleNavbar from "./ToggleNavbar";
 import { BiBookReader } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -50,45 +52,31 @@ const Navbar = () => {
           >
             <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0 bg-white md:bg-transparent rounded-lg">
               <li>
-                <a
-                  href="#"
+                <button
+                  onClick={() => navigate(".")}
                   className="block py-2 px-4 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 dark:text-white dark:hover:bg-blue-500"
                   aria-current="page"
                 >
                   Home
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-4 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 dark:text-white dark:hover:bg-blue-500"
-                >
+                <button className="block py-2 px-4 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 dark:text-white dark:hover:bg-blue-500">
                   About
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-4 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 dark:text-white dark:hover:bg-blue-500"
-                >
+                <button className="block py-2 px-4 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 dark:text-white dark:hover:bg-blue-500">
                   Services
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block py-2 px-4 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 dark:text-white dark:hover:bg-blue-500"
-                >
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                <button
+                  onClick={() => navigate("/login")}
                   className="block py-2 px-4 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200 dark:text-white dark:hover:bg-blue-500"
                 >
                   Login
-                </a>
+                </button>
               </li>
             </ul>
           </div>

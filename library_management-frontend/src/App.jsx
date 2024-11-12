@@ -23,9 +23,9 @@ const App = () => {
   }, []);
   return (
     <div>
-      <Navbar />
-      <div className="mx-5">
-        <BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        <div>
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/login" element={<Login />} />
@@ -40,9 +40,9 @@ const App = () => {
             <Route path="/all-authors" element={<AllAuthors />} />
             <Route path="/all-admins" element={<AdminList />} />
           </Routes>
-        </BrowserRouter>
-      </div>
-      <Footer />
+        </div>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 };

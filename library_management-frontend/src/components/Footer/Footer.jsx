@@ -1,4 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-gray-800 text-white py-6 mt-10">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12">
@@ -14,36 +20,27 @@ const Footer = () => {
             <h3 className="text-xl font-semibold text-gray-300">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#home"
+                <button
+                  onClick={() => navigate(".")}
                   className="text-gray-400 hover:text-blue-400 transition duration-300"
                 >
                   Home
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#about"
-                  className="text-gray-400 hover:text-blue-400 transition duration-300"
-                >
+                <button className="text-gray-400 hover:text-blue-400 transition duration-300">
                   About Us
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#features"
-                  className="text-gray-400 hover:text-blue-400 transition duration-300"
-                >
+                <button className="text-gray-400 hover:text-blue-400 transition duration-300">
                   Features
-                </a>
+                </button>
               </li>
               <li>
-                <a
-                  href="#contact"
-                  className="text-gray-400 hover:text-blue-400 transition duration-300"
-                >
+                <button className="text-gray-400 hover:text-blue-400 transition duration-300">
                   Contact
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -57,7 +54,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transition duration-300"
               >
-                <i className="fab fa-twitter text-2xl"></i>
+                <FaSquareXTwitter />
               </a>
               <a
                 href="https://facebook.com"
@@ -65,7 +62,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transition duration-300"
               >
-                <i className="fab fa-facebook text-2xl"></i>
+                <FaFacebook />
               </a>
               <a
                 href="https://instagram.com"
@@ -73,7 +70,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-400 transition duration-300"
               >
-                <i className="fab fa-instagram text-2xl"></i>
+                <FaInstagramSquare />
               </a>
             </div>
           </div>

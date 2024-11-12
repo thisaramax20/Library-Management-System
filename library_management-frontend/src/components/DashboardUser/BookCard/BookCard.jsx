@@ -17,7 +17,7 @@ const BookCard = ({ name, author, img, genre, bookCode, userId, state }) => {
         userId,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         Swal.fire({
           icon: "success",
           title: "OK...",

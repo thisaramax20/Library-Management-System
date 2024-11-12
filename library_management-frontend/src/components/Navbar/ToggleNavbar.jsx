@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const ToggleNavbar = ({ show, toggleShow }) => {
+  const navigate = useNavigate();
   return (
     <div
       className={`fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity ${
@@ -32,44 +35,30 @@ const ToggleNavbar = ({ show, toggleShow }) => {
         </button>
         <ul className="mt-4 flex flex-col space-y-2">
           <li>
-            <a
-              href="#"
+            <button
+              onClick={() => navigate(".")}
               className="block py-2 px-3 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200"
             >
               Home
-            </a>
+            </button>
           </li>
           <li>
-            <a
-              href="#"
-              className="block py-2 px-3 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200"
-            >
+            <button className="block py-2 px-3 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200">
               About
-            </a>
+            </button>
           </li>
           <li>
-            <a
-              href="#"
-              className="block py-2 px-3 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200"
-            >
+            <button className="block py-2 px-3 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200">
               Services
-            </a>
+            </button>
           </li>
           <li>
-            <a
-              href="#"
-              className="block py-2 px-3 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200"
-            >
-              Contact
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
+            <button
+              onClick={() => navigate("/login")}
               className="block py-2 px-3 text-gray-700 rounded-md hover:bg-blue-600 hover:text-white transition-colors duration-200"
             >
               Login
-            </a>
+            </button>
           </li>
         </ul>
       </div>
