@@ -29,8 +29,6 @@ const Login = () => {
       url = "/user/validate-login";
     }
     try {
-      console.log(username, password);
-
       const response = await axios.post(url, null, {
         params: {
           username,
@@ -45,7 +43,7 @@ const Login = () => {
           } else if (data.type === "AD") {
             navigate(`/dashboard?name=${data.name}`);
           }
-          localStorage.setItem("token", data);
+          localStorage.setItem("token", JSON.stringify(data));
         } else if (data.message === "password incorrect") {
           Swal.fire({
             icon: "error",

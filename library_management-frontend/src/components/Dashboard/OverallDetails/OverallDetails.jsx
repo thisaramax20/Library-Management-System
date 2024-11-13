@@ -20,8 +20,9 @@ const details = [
   },
 ];
 
-const OverallDetails = ({ adminName }) => {
+const OverallDetails = () => {
   const [data, setData] = useState(details);
+  const name = JSON.parse(localStorage.getItem("token")).name;
   const navigate = useNavigate();
   useEffect(() => {
     async function fetchData() {
@@ -52,13 +53,14 @@ const OverallDetails = ({ adminName }) => {
 
   const handleLogout = () => {
     navigate("/login");
+    localStorage.removeItem("token");
   };
   return (
     <div className="p-6 bg-gray-50 rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-5">
         <div className="flex-grow">
           <h1 className="text-5xl font-bold text-gray-800">
-            Hello, <span className="text-red-600">{adminName}!</span>
+            Hello, <span className="text-red-600">{name}!</span>
           </h1>
           <h4 className="text-2xl mt-2 text-gray-600">
             {new Date().getDate()}.{new Date().getMonth() + 1}.

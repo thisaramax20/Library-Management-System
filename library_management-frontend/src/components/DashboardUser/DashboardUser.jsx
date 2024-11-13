@@ -21,9 +21,10 @@ const DashboardUser = () => {
   const handleFilterChange = (filter) => {
     setChangedFilter(filterData.filter((item) => item.name === filter));
   };
+  const authenticated =
+    JSON.parse(localStorage.getItem("token"))?.auth === "yes";
 
   const queryParams = new URLSearchParams(location.search);
-  const name = queryParams.get("name");
   const username = queryParams.get("username");
 
   useEffect(() => {
@@ -38,10 +39,10 @@ const DashboardUser = () => {
     }
     fetchData();
   }, [changedFilter]);
-  return (
+  return authenticated ? (
     <div className="mx-4">
       <div className="my-5">
-        <UserDetails name={name} />
+        <UserDetails />
       </div>
 
       <div>
@@ -92,6 +93,8 @@ const DashboardUser = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <div>Not authenticated</div>
   );
 };
 

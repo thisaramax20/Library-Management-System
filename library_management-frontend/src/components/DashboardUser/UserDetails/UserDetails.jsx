@@ -1,16 +1,18 @@
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
-const UserDetails = ({ name }) => {
+const UserDetails = () => {
   const navigate = useNavigate();
+  const userName = JSON.parse(localStorage.getItem("token")).name;
   const handleLogout = () => {
     navigate("/login");
+    localStorage.removeItem("token");
   };
   return (
     <div className="flex justify-center items-center items-start p-4 bg-slate-50 rounded-md shadow-md">
       <div className="flex-grow">
         <h1 className="text-5xl font-bold mb-2">
-          Hello, <span className="text-red-600">{name}!</span>
+          Hello, <span className="text-red-600">{userName}!</span>
         </h1>
         <h4 className="text-2xl text-gray-600">
           {new Date().getDate()}.{new Date().getMonth() + 1}.
