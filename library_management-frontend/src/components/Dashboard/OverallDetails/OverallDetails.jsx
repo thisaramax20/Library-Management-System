@@ -3,6 +3,7 @@ import axios from "../../../api/axios";
 import { useEffect, useState } from "react";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { RiAdminFill } from "react-icons/ri";
+import { ImStatsBars } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 
 const details = [
@@ -68,6 +69,11 @@ const OverallDetails = () => {
             {new Date().getMinutes().toString().padStart(2, "0")}
           </h4>
         </div>
+        <ImStatsBars
+          size={50}
+          className="text-cyan-900 cursor-pointer hover:scale-110 transform duration-200"
+          onClick={() => navigate("/reports")}
+        />
         <RiAdminFill
           size={50}
           className="text-cyan-900 cursor-pointer hover:scale-110 transform duration-200"

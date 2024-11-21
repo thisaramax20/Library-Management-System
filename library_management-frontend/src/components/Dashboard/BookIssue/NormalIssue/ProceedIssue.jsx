@@ -8,7 +8,7 @@ const ProceedIssue = ({ user, book }) => {
         userId: user.username,
         bookId: book.bookCode,
       });
-      if (response.status === 200) {
+      if (response.status === 201) {
         Swal.fire({
           icon: "success",
           title: "OK...",

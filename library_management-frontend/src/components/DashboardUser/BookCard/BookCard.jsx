@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 const BookCard = ({ name, author, img, genre, bookCode, userId, state }) => {
   async function preOrder() {
-    if (state === "pre-ordered" || state === "ongoing") {
+    if (state === "pre-ordered" || state === "ongoing" || state === "issued") {
       Swal.fire({
         icon: "error",
         title: "Sorry...",

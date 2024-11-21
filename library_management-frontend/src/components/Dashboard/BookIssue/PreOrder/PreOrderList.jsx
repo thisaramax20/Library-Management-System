@@ -20,7 +20,7 @@ const PreOrderList = ({ preOrderList }) => {
         userId,
         bookId,
       });
-      if (response.statusCode === 200) {
+      if (response.statusCode === 201) {
         Swal.fire({
           icon: "success",
           title: "OK...",
